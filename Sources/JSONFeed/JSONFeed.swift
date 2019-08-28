@@ -1,7 +1,7 @@
 import Foundation
 
 /// enumeration to specify version of feed easily
-enum JSONFeedVersion: String, Codable {
+public enum JSONFeedVersion: String, Codable {
     case version1 = "https://jsonfeed.org/version/1"
 }
 
@@ -81,7 +81,7 @@ public class JSONFeed: Codable {
      - Parameter url: URL of feed.
      - Returns: JSONFeed?
     */
-    class func load(from url: URL) -> JSONFeed? {
+    public class func load(from url: URL) -> JSONFeed? {
         
         // create decoder object
         let JSON_DECODER = JSONDecoder()
@@ -97,7 +97,7 @@ public class JSONFeed: Codable {
      - Parameter data: Data to be decoded into JSON Feed
      - Returns: JSONFeed?
     */
-    class func load(from data: Data) -> JSONFeed? {
+    public class func load(from data: Data) -> JSONFeed? {
         
         // create decoder object.
         let JSON_DECODER = JSONDecoder()
@@ -127,7 +127,7 @@ public class JSONFeed: Codable {
      method to retrieve JSON feed as string.
      - Returns: String?
     */
-    func display() -> String? {
+    public func display() -> String? {
         guard let JSON_DATA = json(), let CONTENT = String(data: JSON_DATA, encoding: .utf8) else { return nil }
         
         return CONTENT
@@ -137,7 +137,7 @@ public class JSONFeed: Codable {
      method to save JSON feed somewhere.
      - Parameter path: the location where the JSON file is to be saved.
     */
-    func save(to path: URL) {
+    public func save(to path: URL) {
         guard let JSON_DATA = json() else { return }
         
         try? JSON_DATA.write(to: path, options: .atomic)
