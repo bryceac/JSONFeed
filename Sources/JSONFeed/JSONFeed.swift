@@ -127,7 +127,7 @@ public class JSONFeed: Codable {
      method to retrieve JSON feed as string.
      - Returns: String?
     */
-    func display() -> String? {
+    public func display() -> String? {
         guard let JSON_DATA = json(), let CONTENT = String(data: JSON_DATA, encoding: .utf8) else { return nil }
         
         return CONTENT
@@ -137,7 +137,7 @@ public class JSONFeed: Codable {
      method to save JSON feed somewhere.
      - Parameter path: the location where the JSON file is to be saved.
     */
-    func save(to path: URL) {
+    public func save(to path: URL) {
         guard let JSON_DATA = json() else { return }
         
         try? JSON_DATA.write(to: path, options: .atomic)
