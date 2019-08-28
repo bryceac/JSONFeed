@@ -10,7 +10,7 @@ import Foundation
 /** type that hold data concerning attachments in JSON feed.
  For more information regarding attachments, look under the Attachments section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-public struct JSONFeedAttachment: Codable {
+public class JSONFeedAttachment: Codable {
     /// property that holds attachment URL.
     var url: URL
     
@@ -27,7 +27,7 @@ public struct JSONFeedAttachment: Codable {
     var durationInSeconds: Int?
     
     enum CodingKeys: String, CodingKey {
-        case url, mimeType = "mime_type", sizeInBytes = "size_in_bytes", durationInSeconds = "duration_in_seconds"
+        case url, mimeType = "mime_type", title, sizeInBytes = "size_in_bytes", durationInSeconds = "duration_in_seconds"
     }
 
     /**
@@ -37,7 +37,7 @@ public struct JSONFeedAttachment: Codable {
         - mimeType: specifies mime type for attachment (required).
         - title: specifies title for attachment (optional)
         - sizeInBytes: specficifies file size for attachment (optional).
-        - durationInSecond: specifies the attachment's duration (optional)
+        - durationInSeconds: specifies the attachment's duration (optional)
     */
     public init(withURL url: URL, mimeType: String, title: String? = nil, sizeInBytes: Int? = nil, durationInSeconds: Int? = nil) {
         self.url = url
@@ -45,5 +45,57 @@ public struct JSONFeedAttachment: Codable {
         self.title = title
         self.sizeInBytes = sizeInBytes
         self.durationInSeconds = durationInSeconds
+    }
+
+    /**
+    decoding initializer that is lax in what must be present in the JSON for it to decode properly.
+    */
+    public required convenience init(from decoder: Decoder) throws {
+        let CONTAINER = try decoder.container(keyedBY: CodingKeys.self)
+
+        let ATTACHMENT_URL = try CONTAINER.decode(URL.self, forKey: .url)
+        let MIME_TYPE = try CONTAINER.decode(String.self, forKey: .mimeType)
+
+        var title: String? = nil
+
+        if CONTAINER.contains(.title) {
+            title = try CONTAINER.decode(String.self, forKey: .title)
+        }
+
+        var sizeInBytes: Int? = nil
+
+        if CONTAINER.contains(.sizeInBytes) {
+            sizeInBytes = try CONTAINER.decode(Int.self, forKey: .sizeInBytes)
+        }
+
+        var durationInSeconds: Int? = nil
+
+        if CONTAINER.contains(.durationInSeconds) {
+            durationInSeconds = try CONTAINER.decode(Int.self, forKey: .durationInSeconds)
+        }
+
+        self.init(withURL: ATTACHMENT_URL, mimeType: MIME_TYPE, title: title, sizeInBytes: sizeInBytes, durationInSeconds: durationInSeconds)
+    }
+
+    /**
+    encoding function that make sure only properties that are not nil are included in JSON.
+    */
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBY: CodingKeys.self)
+
+        try container.encode(url, forKey: .url)
+        try container.encode(mimeType, forKey: .mimeType)
+
+        if let title = title {
+            try container.encode(title, forKey: .title)
+        }
+
+        if let sizeInBytes = sizeInBytes {
+            try container.encode(sizeInBytes, forKey: .sizeInBytes)
+        }
+
+        if let durationInSeconds = durationInSeconds {
+            try container.encode(durationInSeconds)
+        }
     }
 }

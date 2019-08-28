@@ -28,7 +28,7 @@ public class JSONFeedItem: Codable, Equatable {
     var bannerImage: URL?
     
     /// property that holds the title
-    var title: String
+    var title: String?
     
     /// property that contains the content
     var htmlContent: String
@@ -63,7 +63,7 @@ public class JSONFeedItem: Codable, Equatable {
         - externalURL: used to specify the location of the subject (optional).
         - image: sets item's image (optional).
         - bannerImage: sets a banner image for the item.
-        - title: sets the item's title (required).
+        - title: sets the item's title (optional).
         - htmlContent: set item's content (required).
         - summary: set summary of item (optional).
         - datePublished: specifies publication date (required).
@@ -72,7 +72,7 @@ public class JSONFeedItem: Codable, Equatable {
         - tags: set tags for item (optional. defaults to empty String array).
         - attachments: set attachments for item (optional. defaults to empty JSONFeedAttachment array).
     */
-    public init(withID id: String, url: URL, externalURL: URL? = nil, image: URL? = nil, bannerImage: URL? = nil, title: String, htmlContent: String, summary: String? = nil, datePublished: Date, dateModified: Date? = nil, author: JSONFeedAuthor? = nil, tags: [String] = [String](), attachments: [JSONFeedAttachment] = [JSONFeedAttachment]()) {
+    public init(withID id: String, url: URL, externalURL: URL? = nil, image: URL? = nil, bannerImage: URL? = nil, title: String? = nil, htmlContent: String, summary: String? = nil, datePublished: Date, dateModified: Date? = nil, author: JSONFeedAuthor? = nil, tags: [String] = [String](), attachments: [JSONFeedAttachment] = [JSONFeedAttachment]()) {
         ID = id
         self.url = url
         self.externalURL = externalURL
@@ -124,8 +124,12 @@ public class JSONFeedItem: Codable, Equatable {
             bannerImage = try CONTAINER.decode(URL.self, forKey: .bannerImage)
         }
         
-        // retrieve title
-        let TITLE = try CONTAINER.decode(String.self, forKey: .title)
+        // retrieve title, if present
+        var title: String? = nil
+
+        if CONTAINER.contains(.title) {
+            title = try CONTAINER.decode(String.self, forKey: .title)
+        } 
         
         // retrieve content
         let HTML_CONTENT = try CONTAINER.decode(String.self, forKey: .htmlContent)
@@ -181,7 +185,7 @@ public class JSONFeedItem: Codable, Equatable {
         }
         
         // create JSONFeedItem with the retrieved data
-        self.init(withID: ID, url: ITEM_URL, externalURL: externalURL, image: image, bannerImage: bannerImage, title: TITLE, htmlContent: HTML_CONTENT, summary: summary, datePublished: datePublished, dateModified: revisedDate, author: author, tags: tags, attachments: attachments)
+        self.init(withID: ID, url: ITEM_URL, externalURL: externalURL, image: image, bannerImage: bannerImage, title: title, htmlContent: HTML_CONTENT, summary: summary, datePublished: datePublished, dateModified: revisedDate, author: author, tags: tags, attachments: attachments)
     }
     
     public static func ==(lhs: JSONFeedItem, rhs: JSONFeedItem) -> Bool {
@@ -211,7 +215,10 @@ public class JSONFeedItem: Codable, Equatable {
             try container.encode(bannerImage, forKey: .bannerImage)
         }
         
-        try container.encode(title, forKey: .title)
+        if let title = title {
+            try container.encode(title, forKey: .title)
+        }
+        
         try container.encode(htmlContent, forKey: .htmlContent)
         
         if let summary = summary {
