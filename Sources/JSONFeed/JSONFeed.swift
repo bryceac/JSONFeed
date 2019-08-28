@@ -9,7 +9,7 @@ enum JSONFeedVersion: String, Codable {
  
  For more information regarding JSON Feeds and best practices, refer to the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-class JSONFeed: Codable {
+public class JSONFeed: Codable {
     
     /// feed version
     var version: JSONFeedVersion
@@ -62,7 +62,7 @@ class JSONFeed: Codable {
         - expired: specifies whether feed is active or not (optional. defaults to false)
         - items: specifies feed items (optional. defaults to empty JSONFeedItem array).
      */
-    init!(withVersion version: JSONFeedVersion = JSONFeedVersion.version1, title: String, homePage: URL? = nil, url: URL? = nil, icon: URL?, favicon: URL? = nil, author: JSONFeedAuthor, desc: String? = nil, comments: String? = nil, expired: Bool = false, items: [JSONFeedItem] = [JSONFeedItem]()) {
+    public init!(withVersion version: JSONFeedVersion = JSONFeedVersion.version1, title: String, homePage: URL? = nil, url: URL? = nil, icon: URL?, favicon: URL? = nil, author: JSONFeedAuthor, desc: String? = nil, comments: String? = nil, expired: Bool = false, items: [JSONFeedItem] = [JSONFeedItem]()) {
         guard !title.isEmpty else { return nil }
         self.version = version
         self.title = title
