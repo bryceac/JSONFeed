@@ -190,7 +190,7 @@ public class JSONFeedItem: Codable, Equatable {
         }
         
         // create JSONFeedItem with the retrieved data
-        self.init(withID: ID, url: ITEM_URL, externalURL: externalURL, image: image, bannerImage: bannerImage, title: title, htmlContent: HTML_CONTENT, summary: summary, datePublished: datePublished, dateModified: revisedDate, author: author, tags: tags, attachments: attachments)
+        self.init(withID: ID, url: url, externalURL: externalURL, image: image, bannerImage: bannerImage, title: title, htmlContent: HTML_CONTENT, summary: summary, datePublished: datePublished, dateModified: revisedDate, author: author, tags: tags, attachments: attachments)
     }
     
     public static func ==(lhs: JSONFeedItem, rhs: JSONFeedItem) -> Bool {

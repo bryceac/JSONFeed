@@ -215,7 +215,7 @@ public class JSONFeed: Codable {
     encoding method that insures that things are only encoded as needed.
     */
     public func encode(to encoder: Encoder) throws {
-        var container encoder.container(keyedBy: CodingKeys.self)
+        var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(version)
         try container.encode(title)
@@ -236,7 +236,7 @@ public class JSONFeed: Codable {
             try container.encode(favicon)
         }
 
-        try concerning.encode(author)
+        try container.encode(author)
 
         if let desc = desc {
             try container.encode(desc)

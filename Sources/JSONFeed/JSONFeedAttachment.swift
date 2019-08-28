@@ -51,7 +51,7 @@ public class JSONFeedAttachment: Codable {
     decoding initializer that is lax in what must be present in the JSON for it to decode properly.
     */
     public required convenience init(from decoder: Decoder) throws {
-        let CONTAINER = try decoder.container(keyedBY: CodingKeys.self)
+        let CONTAINER = try decoder.container(keyedBy: CodingKeys.self)
 
         let ATTACHMENT_URL = try CONTAINER.decode(URL.self, forKey: .url)
         let MIME_TYPE = try CONTAINER.decode(String.self, forKey: .mimeType)
@@ -81,7 +81,7 @@ public class JSONFeedAttachment: Codable {
     encoding function that make sure only properties that are not nil are included in JSON.
     */
     public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBY: CodingKeys.self)
+        var container = encoder.container(keyedBy: CodingKeys.self)
 
         try container.encode(url, forKey: .url)
         try container.encode(mimeType, forKey: .mimeType)
