@@ -8,10 +8,10 @@ For more more information, refer to the [JSON Feed spec.](https://jsonfeed.org/v
 public struct JSONFeedHub: Codable {
 
     /// endpoint type
-    var type: String
+    public var type: String
 
     /// endpot URL
-    var url: URL
+    public var url: URL
 
     /**
     default initializer

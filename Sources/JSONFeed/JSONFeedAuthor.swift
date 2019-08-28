@@ -13,13 +13,13 @@ import Foundation
 public struct JSONFeedAuthor: Codable {
     
     /// property that holds the author's name
-    var name: String?
+    public var name: String?
     
     /// property that holds the address of the author's website
-    var url: URL?
+    public var url: URL?
     
     /// property that contains the address of the author's avatar
-    var avatar: URL?
+    public var avatar: URL?
     
     /** initializer that creates an Optional JSONAuthor object
      - Parameter name: The author's name.

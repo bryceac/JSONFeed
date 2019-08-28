@@ -13,43 +13,43 @@ import Foundation
 public class JSONFeedItem: Codable, Equatable {
     
     /// property that holds the item identifier
-    let ID: String
+    public let ID: String
     
     /// property that holds the address of the item
-    var url: URL?
+    public var url: URL?
     
     /// property that holds the address of an item at hand
-    var externalURL: URL?
+    public var externalURL: URL?
     
     /// property that specifies an image for the item
-    var image: URL?
+    public var image: URL?
     
     /// property that will hold a banner image
-    var bannerImage: URL?
+    public var bannerImage: URL?
     
     /// property that holds the title
-    var title: String?
+    public var title: String?
     
     /// property that contains the content
-    var htmlContent: String
+    public var htmlContent: String
     
     /// property that holds the summary
-    var summary: String?
+    public var summary: String?
     
     /// property that holds the published date
-    let DATE_PUBLISHED: Date
+    public let DATE_PUBLISHED: Date
     
     /// property that holds the modified date
-    var dateModified: Date?
+    public var dateModified: Date?
     
     /// property that contains author info
-    var author: JSONFeedAuthor?
+    public var author: JSONFeedAuthor?
     
     /// property that holds the tags
-    var tags: [String]
+    public var tags: [String]
     
     /// property that holds attachments
-    var attachments: [JSONFeedAttachment]
+    public var attachments: [JSONFeedAttachment]
     
     // set coding keys, so they match JSON spec
     enum CodingKeys: String, CodingKey {

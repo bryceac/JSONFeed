@@ -12,19 +12,19 @@ import Foundation
  */
 public class JSONFeedAttachment: Codable {
     /// property that holds attachment URL.
-    var url: URL
+    public var url: URL
     
     /// property that holds attachment mime type.
-    var mimeType: String
+    public var mimeType: String
     
     /// property that holds the name of the attachment
-    var title: String?
+    public var title: String?
     
     /// property that holds the file's size in bytes
-    var sizeInBytes: Int?
+    public var sizeInBytes: Int?
     
     /// property that holds the duration in seconds
-    var durationInSeconds: Int?
+    public var durationInSeconds: Int?
     
     enum CodingKeys: String, CodingKey {
         case url, mimeType = "mime_type", title, sizeInBytes = "size_in_bytes", durationInSeconds = "duration_in_seconds"

@@ -12,40 +12,40 @@ public enum JSONFeedVersion: String, Codable {
 public class JSONFeed: Codable {
     
     /// feed version
-    var version: JSONFeedVersion
+    public var version: JSONFeedVersion
     
     /// feed title
-    var title: String
+    public var title: String
     
     /// website URL
-    var homePage: URL?
+    public var homePage: URL?
     
     /// feed URL
-    var url: URL?
+    public var url: URL?
     
     /// icon URL
-    var icon: URL?
+    public var icon: URL?
     
     /// favicon URL
-    var favicon: URL?
+    public var favicon: URL?
     
     /// feed author struct
-    var author: JSONFeedAuthor
+    public var author: JSONFeedAuthor
     
     /// feed description
-    var desc: String?
+    public var desc: String?
     
     /// user comments for feed
-    var comments: String?
+    public var comments: String?
     
     /// status of feed's life
-    var expired: Bool
+    public var expired: Bool
     
     /// endpoints to follow feed
-    var hubs: [JSONFeedHub]
+    public var hubs: [JSONFeedHub]
 
     /// feed items
-    var items: [JSONFeedItem]
+    public var items: [JSONFeedItem]
     
     enum CodingKeys: String, CodingKey {
         case version, title, homePage = "home_page_url", url = "feed_url", icon, favicon, author, desc = "description", comments = "user_comment", expired, hubs, items
