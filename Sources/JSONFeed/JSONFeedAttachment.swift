@@ -95,7 +95,7 @@ public class JSONFeedAttachment: Codable {
         }
 
         if let durationInSeconds = durationInSeconds {
-            try container.encode(durationInSeconds)
+            try container.encode(durationInSeconds, forKey: .durationInSeconds)
         }
     }
 }

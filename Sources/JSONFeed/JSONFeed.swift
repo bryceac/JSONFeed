@@ -247,7 +247,7 @@ public class JSONFeed: Codable {
         }
 
         if expired {
-            try container.encode(expired, forKey: expired)
+            try container.encode(expired, forKey: .expired)
         }
 
         if !hubs.isEmpty {
