@@ -1,0 +1,18 @@
+=JSONFeed=
+
+'''Author:''' Bryce Campbell
+
+'''Description:''' A Swift library to help parse and create JSON feeds, based upon the spec, as specified the [https://jsonfeed.org/version/1 | JSONFeed website].
+
+'''Version:''' 0.1
+
+==Notes==
+
+This library utilizes Codable to encode and decode feeds, so it >strong>should</strong> work with Swift version 4, but it is not guaranteed, as this code has only been tested with Swift version 5.
+
+Right now, the models are basic enough that there should not be any troubles compiling in version of Swift earlier than 5.
+
+==Support==
+
+As this library is newly created, and not yet tested, I cannot provide any help, though I have tried to make sure to comment things well enough to make things easy to figure out.
+
