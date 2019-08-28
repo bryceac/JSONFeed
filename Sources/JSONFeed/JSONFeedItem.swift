@@ -189,7 +189,7 @@ public class JSONFeedItem: Codable, Equatable {
     }
     
     // custom encoding function, to make sure date format is right and only the necessary data is present in JSON
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         // set up RFC3339 date formatter
         let RFC3339_DATE_FORMATTER = DateFormatter()
         RFC3339_DATE_FORMATTER.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
