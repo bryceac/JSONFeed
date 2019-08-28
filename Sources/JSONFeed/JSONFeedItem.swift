@@ -10,7 +10,7 @@ import Foundation
 /** houses details concerning a feed item in JSON
  For details regarding Feed Items, look under the Items section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-class JSONFeedItem: Codable, Equatable {
+public class JSONFeedItem: Codable, Equatable {
     
     /// property that holds the item identifier
     let ID: String
@@ -72,7 +72,7 @@ class JSONFeedItem: Codable, Equatable {
         - tags: set tags for item (optional. defaults to empty String array).
         - attachments: set attachments for item (optional. defaults to empty JSONFeedAttachment array).
     */
-    init(withID id: String, url: URL, externalURL: URL? = nil, image: URL? = nil, bannerImage: URL? = nil, title: String, htmlContent: String, summary: String? = nil, datePublished: Date, dateModified: Date? = nil, author: JSONFeedAuthor? = nil, tags: [String] = [String](), attachments: [JSONFeedAttachment] = [JSONFeedAttachment]()) {
+    public init(withID id: String, url: URL, externalURL: URL? = nil, image: URL? = nil, bannerImage: URL? = nil, title: String, htmlContent: String, summary: String? = nil, datePublished: Date, dateModified: Date? = nil, author: JSONFeedAuthor? = nil, tags: [String] = [String](), attachments: [JSONFeedAttachment] = [JSONFeedAttachment]()) {
         ID = id
         self.url = url
         self.externalURL = externalURL
@@ -89,7 +89,7 @@ class JSONFeedItem: Codable, Equatable {
     }
     
     // add initializer, to allow relaxed decoding
-    required convenience init(from decoder: Decoder) throws {
+    public required convenience init(from decoder: Decoder) throws {
         // set up RFC3339 date formatter
         let RFC3339_DATE_FORMATTER = DateFormatter()
         RFC3339_DATE_FORMATTER.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
