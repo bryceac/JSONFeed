@@ -217,43 +217,43 @@ public class JSONFeed: Codable {
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 
-        try container.encode(version)
-        try container.encode(title)
+        try container.encode(version, forKey: .version)
+        try container.encode(title, forKey: .title)
 
         if let homePage = homePage {
-            try container.encode(homePage)
+            try container.encode(homePage, forKey: .homePage)
         }
 
         if let url = url {
-            try container.encode(url)
+            try container.encode(url, forKey: .url)
         }
 
         if let icon = icon {
-            try container.encode(icon)
+            try container.encode(icon, forKey: .icon)
         }
 
         if let favicon = favicon {
-            try container.encode(favicon)
+            try container.encode(favicon, forKey: .favicon)
         }
 
-        try container.encode(author)
+        try container.encode(author, forKey: .author)
 
         if let desc = desc {
-            try container.encode(desc)
+            try container.encode(desc, forKey: .desc)
         }
 
         if let comments = comments {
-            try container.encode(comments)
+            try container.encode(comments, forKey: .comments)
         }
 
         if expired {
-            try container.encode(expired)
+            try container.encode(expired, forKey: expired)
         }
 
         if !hubs.isEmpty {
-            try container.encode(hubs)
+            try container.encode(hubs, forKey: .hubs)
         }
 
-        try container.encode(items)
+        try container.encode(items, forKey: .items)
     }
 }

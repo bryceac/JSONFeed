@@ -5,7 +5,7 @@ use to establish endpoints for feeds.
 
 For more more information, refer to the [JSON Feed spec.](https://jsonfeed.org/version/1)
 */
-public class JSONFeedHub: Codable {
+public struct JSONFeedHub: Codable {
 
     /// endpoint type
     var type: String
