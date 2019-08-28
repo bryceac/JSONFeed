@@ -2,7 +2,9 @@
 
 '''Author:''' Bryce Campbell
 
-'''Description:''' A Swift library to help parse and create JSON feeds, based upon the spec, as specified the [https://jsonfeed.org/version/1 | JSONFeed website].
+'''Description:''' A Swift library to help parse and create JSON feeds, based upon the spec, as specified the [https://jsonfeed.org/version/1 JSONFeed website].
+
+'''License:''' See LICENSE
 
 '''Version:''' 0.1
 
