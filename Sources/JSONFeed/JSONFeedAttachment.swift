@@ -10,7 +10,7 @@ import Foundation
 /** type that hold data concerning attachments in JSON feed.
  For more information regarding attachments, look under the Attachments section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-struct JSONFeedAttachment: Codable {
+public struct JSONFeedAttachment: Codable {
     /// property that holds attachment URL.
     var url: URL
     
