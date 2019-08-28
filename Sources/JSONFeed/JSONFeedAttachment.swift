@@ -29,4 +29,21 @@ public struct JSONFeedAttachment: Codable {
     enum CodingKeys: String, CodingKey {
         case url, mimeType = "mime_type", sizeInBytes = "size_in_bytes", durationInSeconds = "duration_in_seconds"
     }
+
+    /**
+    default initializer.
+    - Parameters: 
+        - url: specifies attachment URL (required).
+        - mimeType: specifies mime type for attachment (required).
+        - title: specifies title for attachment (optional)
+        - sizeInBytes: specficifies file size for attachment (optional).
+        - durationInSecond: specifies the attachment's duration (optional)
+    */
+    public init(withURL url: URL, mimeType: String, title: String? = nil, sizeInBytes: Int? = nil, durationInSeconds: Int? = nil) {
+        self.url = url
+        self.mimeType = mimeType
+        self.title = title
+        self.sizeInBytes = sizeInBytes
+        self.durationInSeconds = durationInSeconds
+    }
 }
