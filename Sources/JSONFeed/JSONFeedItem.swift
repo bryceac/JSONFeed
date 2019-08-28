@@ -184,7 +184,7 @@ public class JSONFeedItem: Codable, Equatable {
         self.init(withID: ID, url: ITEM_URL, externalURL: externalURL, image: image, bannerImage: bannerImage, title: TITLE, htmlContent: HTML_CONTENT, summary: summary, datePublished: datePublished, dateModified: revisedDate, author: author, tags: tags, attachments: attachments)
     }
     
-    static func ==(lhs: JSONFeedItem, rhs: JSONFeedItem) -> Bool {
+    public static func ==(lhs: JSONFeedItem, rhs: JSONFeedItem) -> Bool {
         return lhs.ID == rhs.ID
     }
     
