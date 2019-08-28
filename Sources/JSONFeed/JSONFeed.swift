@@ -62,7 +62,7 @@ public class JSONFeed: Codable {
         - expired: specifies whether feed is active or not (optional. defaults to false)
         - items: specifies feed items (optional. defaults to empty JSONFeedItem array).
      */
-    public init!(withVersion version: JSONFeedVersion = JSONFeedVersion.version1, title: String, homePage: URL? = nil, url: URL? = nil, icon: URL?, favicon: URL? = nil, author: JSONFeedAuthor, desc: String? = nil, comments: String? = nil, expired: Bool = false, items: [JSONFeedItem] = [JSONFeedItem]()) {
+    public init!(withVersion version: JSONFeedVersion = JSONFeedVersion.version1, title: String, homePage: URL? = nil, url: URL? = nil, icon: URL? = nil, favicon: URL? = nil, author: JSONFeedAuthor, desc: String? = nil, comments: String? = nil, expired: Bool = false, items: [JSONFeedItem] = [JSONFeedItem]()) {
         guard !title.isEmpty else { return nil }
         self.version = version
         self.title = title
