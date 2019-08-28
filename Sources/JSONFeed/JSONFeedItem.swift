@@ -16,7 +16,7 @@ public class JSONFeedItem: Codable, Equatable {
     let ID: String
     
     /// property that holds the address of the item
-    var url: URL
+    var url: URL?
     
     /// property that holds the address of an item at hand
     var externalURL: URL?
@@ -72,7 +72,7 @@ public class JSONFeedItem: Codable, Equatable {
         - tags: set tags for item (optional. defaults to empty String array).
         - attachments: set attachments for item (optional. defaults to empty JSONFeedAttachment array).
     */
-    public init(withID id: String, url: URL, externalURL: URL? = nil, image: URL? = nil, bannerImage: URL? = nil, title: String? = nil, htmlContent: String, summary: String? = nil, datePublished: Date, dateModified: Date? = nil, author: JSONFeedAuthor? = nil, tags: [String] = [String](), attachments: [JSONFeedAttachment] = [JSONFeedAttachment]()) {
+    public init(withID id: String, url: URL? = nil, externalURL: URL? = nil, image: URL? = nil, bannerImage: URL? = nil, title: String? = nil, htmlContent: String, summary: String? = nil, datePublished: Date, dateModified: Date? = nil, author: JSONFeedAuthor? = nil, tags: [String] = [String](), attachments: [JSONFeedAttachment] = [JSONFeedAttachment]()) {
         ID = id
         self.url = url
         self.externalURL = externalURL
@@ -100,8 +100,13 @@ public class JSONFeedItem: Codable, Equatable {
         // retrieve id
         let ID = try CONTAINER.decode(String.self, forKey: .ID)
         
-        // retrieve URL
-        let ITEM_URL = try CONTAINER.decode(URL.self, forKey: .url)
+        // retrieve URL for item, if present
+        var url: URL? = nil 
+        
+        if CONTAINER.contains(.url) {
+            url = try CONTAINER.decode(URL.self, forKey: .url)
+        }
+        
         
         // retrieve external URL, if one is present
         var externalURL: URL? = nil
@@ -201,7 +206,10 @@ public class JSONFeedItem: Codable, Equatable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         
         try container.encode(ID, forKey: .ID)
-        try container.encode(url, forKey: .url)
+
+        if let url = url {
+            try container.encode(url, forKey: .url)
+        }
         
         if let externalURL = externalURL {
             try container.encode(externalURL, forKey: .externalURL)
@@ -218,7 +226,7 @@ public class JSONFeedItem: Codable, Equatable {
         if let title = title {
             try container.encode(title, forKey: .title)
         }
-        
+
         try container.encode(htmlContent, forKey: .htmlContent)
         
         if let summary = summary {
