@@ -292,6 +292,8 @@ extension Sequence where Iterator.Element == JSONFeedItem {
                     output + "\(item)\(separator)"
                 }
             }
+
+            return output
         }
     }
 }

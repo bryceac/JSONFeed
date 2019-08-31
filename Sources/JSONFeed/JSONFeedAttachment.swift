@@ -121,6 +121,8 @@ extension Sequence where Iterator.Element == JSONFeedAttachment {
                     output + "\(attachment)\(separator)"
                 }
             }
+
+            return output
         }
     }
 }

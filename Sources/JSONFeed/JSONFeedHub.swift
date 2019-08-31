@@ -44,6 +44,8 @@ extension Sequence where Iterator.Element == JSONFeedHub {
                     output + "\(hub)\(separator)"
                 }
             }
+
+            return output
         }
     }
 }
