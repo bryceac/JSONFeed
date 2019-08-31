@@ -32,3 +32,18 @@ public struct JSONFeedHub: Codable, CustomStringConvertible {
         self.url = url
     }
 }
+
+// create extension, so that items can be combined into strings easily
+extension Sequence where Iterator.Element == JSONFeedHub {
+    func joinWithSeparator(_ separator: String) -> String {
+        self.reduce("") {(output, hub) in
+            if let lastElement = self.last {
+                if hub == lastElement {
+                    output + "\(hub)"
+                } else {
+                    output + "\(hub)\(separator)"
+                }
+            }
+        }
+    }
+}

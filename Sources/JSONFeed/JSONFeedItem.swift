@@ -61,7 +61,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         Banner Image URL: \(bannerImage?.absoluteString ?? "Not Provided")
         Title: \(title ?? "Not Provided")
         Content: \(htmlContent)
-        Summary: \(summary)
+        Summary: \(summary ?? "Not Provided")
         Date Published: \(DATE_PUBLISHED)
         Date Modified: \(dateModified?)
         
@@ -277,6 +277,21 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         
         if !attachments.isEmpty {
             try container.encode(attachments, forKey: .attachments)
+        }
+    }
+}
+
+// create extension, so that items can be combined into strings easily
+extension Sequence where Iterator.Element == JSONFeedItem {
+    func joinWithSeparator(_ separator: String) -> String {
+        self.reduce("") {(output, item) in
+            if let lastElement = self.last {
+                if item == lastElement {
+                    output + "\(item)"
+                } else {
+                    output + "\(item)\(separator)"
+                }
+            }
         }
     }
 }

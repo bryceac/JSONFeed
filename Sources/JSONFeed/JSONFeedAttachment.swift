@@ -30,7 +30,7 @@ public class JSONFeedAttachment: Codable, CustomStringConvertible {
     public var description: String {
         return """
         URL: \(url)
-        Title: \(title)
+        Title: \(title ?? "Not Provided")
         Size in Bytes: \(sizeInBytes ?? 0)
         Duration in seconds: \(durationInSeconds ?? 0)
         """
@@ -106,6 +106,21 @@ public class JSONFeedAttachment: Codable, CustomStringConvertible {
 
         if let durationInSeconds = durationInSeconds {
             try container.encode(durationInSeconds, forKey: .durationInSeconds)
+        }
+    }
+}
+
+// create extension, so that items can be combined into strings easily
+extension Sequence where Iterator.Element == JSONFeedAttachment {
+    func joinWithSeparator(_ separator: String) -> String {
+        self.reduce("") {(output, attachment) in
+            if let lastElement = self.last {
+                if attachment == lastElement {
+                    output + "\(attachment)"
+                } else {
+                    output + "\(attachment)\(separator)"
+                }
+            }
         }
     }
 }
