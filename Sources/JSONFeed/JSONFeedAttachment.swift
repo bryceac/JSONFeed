@@ -116,9 +116,9 @@ extension Sequence where Iterator.Element == JSONFeedAttachment {
         return self.reduce("") {(output, attachment) in
             if let lastElement = self.last {
                 if attachment == lastElement {
-                    output + "\(attachment)"
+                    output += "\(attachment)"
                 } else {
-                    output + "\(attachment)\(separator)"
+                    output += "\(attachment)\(separator)"
                 }
             }
 

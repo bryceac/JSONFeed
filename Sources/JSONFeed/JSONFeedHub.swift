@@ -39,9 +39,9 @@ extension Sequence where Iterator.Element == JSONFeedHub {
         return self.reduce("") {(output, hub) in
             if let lastElement = self.last {
                 if hub == lastElement {
-                    output + "\(hub)"
+                    output += "\(hub)"
                 } else {
-                    output + "\(hub)\(separator)"
+                    output += "\(hub)\(separator)"
                 }
             }
 

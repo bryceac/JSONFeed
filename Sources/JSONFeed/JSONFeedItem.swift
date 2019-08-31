@@ -63,7 +63,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         Content: \(htmlContent)
         Summary: \(summary ?? "Not Provided")
         Date Published: \(DATE_PUBLISHED)
-        Date Modified: \(dateModified?)
+        Date Modified: \(dateModified as Date?)
         
         Author:
         --------
@@ -287,9 +287,9 @@ extension Sequence where Iterator.Element == JSONFeedItem {
         return self.reduce("") {(output, item) in
             if let lastElement = self.last {
                 if item == lastElement {
-                    output + "\(item)"
+                    output += "\(item)"
                 } else {
-                    output + "\(item)\(separator)"
+                    output += "\(item)\(separator)"
                 }
             }
 
