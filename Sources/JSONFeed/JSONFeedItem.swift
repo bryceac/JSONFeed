@@ -119,9 +119,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
     // add initializer, to allow relaxed decoding
     public required convenience init(from decoder: Decoder) throws {
         // set up RFC3339 date formatter, with timezone set for user's current locale and timezone.
-        let RFC3339_DATE_FORMATTER = DateFormatter()
-        RFC3339_DATE_FORMATTER.locale = Locale.current
-        RFC3339_DATE_FORMATTER.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
+        let RFC3339_DATE_FORMATTER = ISO8601DateFormatter()
         RFC3339_DATE_FORMATTER.timeZone = TimeZone.current
         
         // create container
@@ -229,11 +227,8 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
     
     // custom encoding function, to make sure date format is right and only the necessary data is present in JSON
     public func encode(to encoder: Encoder) throws {
-        // set up RFC3339 date formatter and base date conversion off of GMT and US locale
-        let RFC3339_DATE_FORMATTER = DateFormatter()
-        RFC3339_DATE_FORMATTER.locale = Locale(identifier: "en-US-POSIX")
-        RFC3339_DATE_FORMATTER.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZZ"
-        RFC3339_DATE_FORMATTER.timeZone = TimeZone(secondsFromGMT: 0)
+        // set up RFC3339 date formatter
+        let RFC3339_DATE_FORMATTER = ISO8601DateFormatter()
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
