@@ -284,7 +284,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
 // create extension, so that items can be combined into strings easily
 extension Sequence where Iterator.Element == JSONFeedItem {
     func joinWithSeparator(_ separator: String) -> String {
-        return self.reduce(into: "") {(output, item) -> String in
+        return self.reduce(into: "") {(output, item) in
             if let lastElement = self.last {
                 if item == lastElement {
                     output += "\(item)"
@@ -292,8 +292,6 @@ extension Sequence where Iterator.Element == JSONFeedItem {
                     output += "\(item)\(separator)"
                 }
             }
-
-            return output
         }
     }
 }
