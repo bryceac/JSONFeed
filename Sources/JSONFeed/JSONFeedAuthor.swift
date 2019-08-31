@@ -10,7 +10,7 @@ import Foundation
 /** type that holds the details concerning a feed's or item's author.
  For more details, look under the Top-Level section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-public struct JSONFeedAuthor: Codable {
+public struct JSONFeedAuthor: Codable, CustomStringConvertible {
     
     /// property that holds the author's name
     public var name: String?
@@ -20,6 +20,15 @@ public struct JSONFeedAuthor: Codable {
     
     /// property that contains the address of the author's avatar
     public var avatar: URL?
+
+    /// output author properties to string
+    public var description: String {
+        return """
+        Name: \(name ?? "Not Provided")
+        Website: \(url?.absoluteString ?? "Not Provided")
+        Avatar URL: \(url?.absoluteString ?? "Not Provided")
+        """
+    }
     
     /** initializer that creates an Optional JSONAuthor object
      - Parameter name: The author's name.

@@ -10,7 +10,7 @@ import Foundation
 /** type that hold data concerning attachments in JSON feed.
  For more information regarding attachments, look under the Attachments section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-public class JSONFeedAttachment: Codable {
+public class JSONFeedAttachment: Codable, CustomStringConvertible {
     /// property that holds attachment URL.
     public var url: URL
     
@@ -25,6 +25,16 @@ public class JSONFeedAttachment: Codable {
     
     /// property that holds the duration in seconds
     public var durationInSeconds: Int?
+
+    /// output contents of attachment to string
+    public var description: String {
+        return """
+        URL: \(url)
+        Title: \(title)
+        Size in Bytes: \(sizeInBytes ?? 0)
+        Duration in seconds: \(durationInSeconds ?? 0)
+        """
+    }
     
     enum CodingKeys: String, CodingKey {
         case url, mimeType = "mime_type", title, sizeInBytes = "size_in_bytes", durationInSeconds = "duration_in_seconds"

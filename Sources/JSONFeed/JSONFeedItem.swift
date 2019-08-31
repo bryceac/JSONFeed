@@ -10,7 +10,7 @@ import Foundation
 /** houses details concerning a feed item in JSON
  For details regarding Feed Items, look under the Items section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-public class JSONFeedItem: Codable, Equatable {
+public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
     
     /// property that holds the item identifier
     public let ID: String
@@ -50,6 +50,34 @@ public class JSONFeedItem: Codable, Equatable {
     
     /// property that holds attachments
     public var attachments: [JSONFeedAttachment]
+
+    /// output item attributes to string
+    public var description: String {
+        return """
+        id: \(ID)
+        URL: \(url?.absoluteString ?? "Not Provided")
+        External URL: \(externalURL?.absoluteString ?? "Not Provided")
+        Image URL: \(image?.absoluteString ?? "Not Provided")
+        Banner Image URL: \(bannerImage?.absoluteString ?? "Not Provided")
+        Title: \(title ?? "Not Provided")
+        Content: \(htmlContent)
+        Summary: \(summary)
+        Date Published: \(DATE_PUBLISHED)
+        Date Modified: \(dateModified?)
+        
+        Author:
+        --------
+        \(author?.description ?? "Unknown")
+        --------
+
+        Tags: \(tags)
+
+        Attachments:
+        ---------
+        \(attachments.joinWithSeparator("\r\n\r\n"))
+        ---------
+        """
+    }
     
     // set coding keys, so they match JSON spec
     enum CodingKeys: String, CodingKey {

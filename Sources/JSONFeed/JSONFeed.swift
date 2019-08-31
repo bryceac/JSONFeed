@@ -9,7 +9,7 @@ public enum JSONFeedVersion: String, Codable {
  
  For more information regarding JSON Feeds and best practices, refer to the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-public class JSONFeed: Codable {
+public class JSONFeed: Codable, CustomStringConvertible {
     
     /// feed version
     public var version: JSONFeedVersion
@@ -46,6 +46,37 @@ public class JSONFeed: Codable {
 
     /// feed items
     public var items: [JSONFeedItem]
+
+    /// output feed data to string
+    public var description: String {
+        return """
+        Version: \(version.rawValue)
+        Title: \(title)
+        Website: \(homePage?.absoluteString ?? "Not Provided")
+        Feed URL: \(url?.absoluteString ?? "Not Provided")
+        Icon URL: \(icon?.absoluteString ?? "NotProvided")
+        Favicon URL: \(favicon?.absoluteString ?? "Not Provided")
+
+        Author:
+        ---------
+        \(author)
+        ---------
+
+        Description: \(desc)
+        User Comment: \(comments)
+        Active: \(!expired)
+        
+        Hubs:
+        ---------
+        \(hubs.joinWithSeparator("\r\n"))
+        ---------
+
+        Items:
+        ---------
+        \(items.joinWithSeparator("\r\n"))
+        ---------
+        """
+    }
     
     enum CodingKeys: String, CodingKey {
         case version, title, homePage = "home_page_url", url = "feed_url", icon, favicon, author, desc = "description", comments = "user_comment", expired, hubs, items
