@@ -74,7 +74,6 @@ public class JSONFeed: Codable, CustomStringConvertible {
         Items:
         ---------
         \(items.joinWithSeparator("\r\n"))
-        ---------
         """
     }
     
