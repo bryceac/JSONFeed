@@ -10,7 +10,7 @@ import Foundation
 /** type that hold data concerning attachments in JSON feed.
  For more information regarding attachments, look under the Attachments section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
-public class JSONFeedAttachment: Codable, CustomStringConvertible {
+public class JSONFeedAttachment: Codable, Equatable, CustomStringConvertible {
     /// property that holds attachment URL.
     public var url: URL
     
@@ -85,6 +85,11 @@ public class JSONFeedAttachment: Codable, CustomStringConvertible {
         }
 
         self.init(withURL: ATTACHMENT_URL, mimeType: MIME_TYPE, title: title, sizeInBytes: sizeInBytes, durationInSeconds: durationInSeconds)
+    }
+
+    // implement method to compare attachments
+    public static func ==(lhs: JSONFeedAttachment, rhs: JSONFeedAttachment) {
+        return lhs.mimeType == rhs.mimeType && lhs.url == rhs.url && lhs.sizeInBytes == rhs.sizeInBytes && lhs.durationInSeconds == rhs.durationInSeconds && lhs.title == rhs.title
     }
 
     /**

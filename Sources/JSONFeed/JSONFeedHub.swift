@@ -5,7 +5,7 @@ use to establish endpoints for feeds.
 
 For more more information, refer to the [JSON Feed spec.](https://jsonfeed.org/version/1)
 */
-public struct JSONFeedHub: Codable, CustomStringConvertible {
+public struct JSONFeedHub: Codable, Equatable, CustomStringConvertible {
 
     /// endpoint type
     public var type: String
@@ -27,9 +27,14 @@ public struct JSONFeedHub: Codable, CustomStringConvertible {
     - Parameter url: specify the endpoint's address (required)
     - Returns: JSONFeedHub
     */
-    init(withType type: String, andURL url: URL) {
+    public init(withType type: String, andURL url: URL) {
         self.type = type
         self.url = url
+    }
+
+    // implement method to compare hubs.
+    public static func ==(lhs: JSONFeedHub, rhs: JSONFeedHub) {
+        return lhs.type == rhs.type && lhs.url == rhs.url
     }
 }
 
