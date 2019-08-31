@@ -179,7 +179,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         
         var datePublished: Date = Date()
         
-        if let CREATION_DATE = RFC3339_DATE_FORMATTER.date(from: DATE_CREATED, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]) {
+        if let CREATION_DATE = RFC3339_DATE_FORMATTER.date(from: DATE_CREATED) {
             datePublished = CREATION_DATE
         }
         
@@ -260,10 +260,10 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
             try container.encode(summary, forKey: .summary)
         }
         
-        try container.encode(RFC3339_DATE_FORMATTER.string(from: DATE_PUBLISHED, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]), forKey: .DATE_PUBLISHED)
+        try container.encode(RFC3339_DATE_FORMATTER.string(from: DATE_PUBLISHED, timeZone: TimeZone.current, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]), forKey: .DATE_PUBLISHED)
         
         if let dateModified = dateModified {
-            try container.encode(RFC3339_DATE_FORMATTER.string(from: dateModified, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]), forKey: .dateModified)
+            try container.encode(RFC3339_DATE_FORMATTER.string(from: dateModified, timeZone: TimeZone.current, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]), forKey: .dateModified)
         }
         
         if let author = author {
