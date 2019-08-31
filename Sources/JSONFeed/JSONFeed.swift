@@ -62,8 +62,8 @@ public class JSONFeed: Codable, CustomStringConvertible {
         \(author)
         ---------
 
-        Description: \(desc? "Not Provided")
-        User Comment: \(comments? "Not Privideed")
+        Description: \(desc ?? "Not Provided")
+        User Comment: \(comments ?? "Not Privideed")
         Active: \(!expired)
         
         Hubs:

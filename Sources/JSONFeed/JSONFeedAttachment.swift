@@ -113,7 +113,7 @@ public class JSONFeedAttachment: Codable, CustomStringConvertible {
 // create extension, so that items can be combined into strings easily
 extension Sequence where Iterator.Element == JSONFeedAttachment {
     func joinWithSeparator(_ separator: String) -> String {
-        self.reduce("") {(output, attachment) in
+        return self.reduce("") {(output, attachment) in
             if let lastElement = self.last {
                 if attachment == lastElement {
                     output + "\(attachment)"
