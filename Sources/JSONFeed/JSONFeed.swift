@@ -54,7 +54,7 @@ public class JSONFeed: Codable, CustomStringConvertible {
         Title: \(title)
         Website: \(homePage?.absoluteString ?? "Not Provided")
         Feed URL: \(url?.absoluteString ?? "Not Provided")
-        Icon URL: \(icon?.absoluteString ?? "NotProvided")
+        Icon URL: \(icon?.absoluteString ?? "Not Provided")
         Favicon URL: \(favicon?.absoluteString ?? "Not Provided")
 
         Author:
