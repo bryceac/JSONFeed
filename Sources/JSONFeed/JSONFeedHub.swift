@@ -33,7 +33,7 @@ public struct JSONFeedHub: Codable, Equatable, CustomStringConvertible {
     }
 
     // implement method to compare hubs.
-    public static func ==(lhs: JSONFeedHub, rhs: JSONFeedHub) {
+    public static func ==(lhs: JSONFeedHub, rhs: JSONFeedHub) -> Bool {
         return lhs.type == rhs.type && lhs.url == rhs.url
     }
 }

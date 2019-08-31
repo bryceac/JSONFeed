@@ -88,7 +88,7 @@ public class JSONFeedAttachment: Codable, Equatable, CustomStringConvertible {
     }
 
     // implement method to compare attachments
-    public static func ==(lhs: JSONFeedAttachment, rhs: JSONFeedAttachment) {
+    public static func ==(lhs: JSONFeedAttachment, rhs: JSONFeedAttachment) -> Bool {
         return lhs.mimeType == rhs.mimeType && lhs.url == rhs.url && lhs.sizeInBytes == rhs.sizeInBytes && lhs.durationInSeconds == rhs.durationInSeconds && lhs.title == rhs.title
     }
 
