@@ -260,10 +260,10 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
             try container.encode(summary, forKey: .summary)
         }
         
-        try container.encode(RFC3339_DATE_FORMATTER.string(from: DATE_PUBLISHED, timeZone: TimeZone.current, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]), forKey: .DATE_PUBLISHED)
+        try container.encode(RFC3339_DATE_FORMATTER.string(from: DATE_PUBLISHED), forKey: .DATE_PUBLISHED)
         
         if let dateModified = dateModified {
-            try container.encode(RFC3339_DATE_FORMATTER.string(from: dateModified, timeZone: TimeZone.current, formatOptions: [.withYear, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]), forKey: .dateModified)
+            try container.encode(RFC3339_DATE_FORMATTER.string(from: dateModified), forKey: .dateModified)
         }
         
         if let author = author {
