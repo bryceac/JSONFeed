@@ -35,7 +35,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
 
     /// calculated property that returns content as plain text
     public var textContent: String {
-        htmlContent.stripHTML()
+        return htmlContent.stripHTML()
     }
     
     /// property that holds the summary
