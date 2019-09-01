@@ -94,7 +94,7 @@ let FEED = JSONFeed(from: ARCHIVE_URL)
 
 This loads a local file named '''feed.json''' into an optional JSONFeed model.
 
-While this can be used for remote files too, it is not recommended because it does utilize best practices for network communication, nor can it be used in conjunction with.
+While this can be used for remote files too, it is not recommended because it does not utilize best practices for network communication, nor can it be used in conjunction with.
 
 The second would look like this:
 
