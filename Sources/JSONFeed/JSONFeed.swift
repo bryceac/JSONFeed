@@ -186,6 +186,33 @@ public class JSONFeed: Codable, CustomStringConvertible {
         
         return FEED
     }
+
+    /** type method that can be used to load remote JSON feeds asynchronously
+    - Parameter url: URL of feed.
+    - Parameter completion: closure that is to contain the model
+    - Returns: Void
+    */
+    public class func load(from url: URL, completion: @escaping (JSONFeed?) -> Void) {
+        
+        // create URL request
+        let FEED_REQUEST = URLRequest(url: url)
+
+        // create URLSession, in order to retrieve data
+        let DATA_TASK = URLSession.shared.dataTask(with: FEED_REQUEST) {(data, urlResponse, error) in
+            
+            // make sure there is data and attempt to create JSONFeed object
+            guard let data = data, let FEED = JSONFeed.load(from: data) else {
+                print("could not read data.")
+                completion(nil)
+            }
+
+            // send FEED object to completion handler
+            completion(FEED)
+        }
+
+        // execute data task
+        DATA_TASK.resume()
+    }
     
     // function to load Data as model from JSON
     private class func load(from data: Data) -> JSONFeed? {
