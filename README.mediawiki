@@ -6,13 +6,25 @@
 
 '''License:''' See LICENSE
 
-'''Version:''' 0.1
+'''Version:''' 0.2
 
 ==Notes==
 
 This library utilizes Codable to encode and decode feeds, so it >strong>should</strong> work with Swift version 4, but it is not guaranteed, as this code has only been tested with Swift version 5.
 
 Right now, the models are basic enough that there should not be any troubles compiling in version of Swift earlier than 5.
+
+===Version History===
+
+<dl>
+<dt style="font-weight: bold">0.1</dt>
+<dd>Initial release.</dd>
+<dt style="font-weight: bold">0.2</dt>
+<dd><p>Released 8/31/2019.</p> 
+<p>Make load(from: Data) private and creature function with completion handler.</p>
+<p>Also made library compatible with iOS, watchOS, and tvOS, by fixing save mechanism.</p>
+</dd>
+</dl>
 
 ===Creating Feeds===
 
@@ -77,13 +89,11 @@ There are two ways feeds can be loaded/parsed, and <strong>should</strong> be ap
 They are:
 
 <ul>
-<li>URL (local file)</li>
-<li>Data (JSON data)</li>
+<li>load(from: URL)</li>
+<li>load(from:completion:)</li>
 </ul>
 
-Either one could be used, and the first calls the second to actually create an object.
-
-The first would be accomplished like this:
+The first would be used to retrieve local files, like this:
 
 <pre>
 let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -94,29 +104,21 @@ let FEED = JSONFeed(from: ARCHIVE_URL)
 
 This loads a local file named '''feed.json''' into an optional JSONFeed model.
 
-While this can be used for remote files too, it is not recommended because it does not utilize best practices for network communication, nor can it be used in conjunction with them.
-
-The second would look like this:
+The second is used to retrieve remote files and would look like this:
 
 <pre>
 let FEED_URL = URL(string: "http://therecord.co/feed.json")!
 
-let FEED_REQUEST = URLRequest(url: FEED_URL)
+JSONFeed.load(from: FEED_URL) { (feed) in
+    guard let feed = feed else { return }
 
-let DATA_TASK = URLSession.shared.dataTask(with: FEED_REQUEST) {(data, urlResponse, error) in
-    if let data = data, let FEED = JSONFeed.load(from: data) {
-       print(FEED) 
-    } else {
-        print("could not read data")
-    }
+    print(feed)
 }
-
-DATA_TASK.resume()
 </pre>
 
-The above utilizes the recommended way to get data from the Internet, and tries to convert the data into a JSONFeed model.
+The above grabs the specified feed asynchronously and feeds it to a closure that will present the feed details.
 
-This is not built right into the library, but is why the one recommended only for local files uses it within the body.
+It works like a normal data task in Swift, but will not return the response or errors at this time.
 
 ====Reading====
 
