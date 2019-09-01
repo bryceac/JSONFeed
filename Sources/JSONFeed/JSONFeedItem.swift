@@ -32,6 +32,11 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
     
     /// property that contains the content
     public var htmlContent: String
+
+    /// calculated property that returns content as plain text
+    public var textContent: String {
+        htmlContent.stripHTML()
+    }
     
     /// property that holds the summary
     public var summary: String?
@@ -61,6 +66,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         Banner Image URL: \(bannerImage?.absoluteString ?? "Not Provided")
         Title: \(title ?? "Not Provided")
         Content: \(htmlContent)
+        Content (Plain Text): \(textContent)
         Summary: \(summary ?? "Not Provided")
         Date Published: \(DATE_PUBLISHED)
         Date Modified: \(dateModified as Date?)
@@ -81,7 +87,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
     
     // set coding keys, so they match JSON spec
     enum CodingKeys: String, CodingKey {
-        case ID = "id" , url, externalURL = "external_url", image, bannerImage = "banner_image", title, htmlContent = "content_html", summary, DATE_PUBLISHED = "date_published", dateModified = "date_modified", author, tags, attachments
+        case ID = "id" , url, externalURL = "external_url", image, bannerImage = "banner_image", title, htmlContent = "content_html", textContent = "content_text", summary, DATE_PUBLISHED = "date_published", dateModified = "date_modified", author, tags, attachments
     }
     
     /** default initializer to create a JSONFeedItem
@@ -257,6 +263,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         }
 
         try container.encode(htmlContent, forKey: .htmlContent)
+        try container.encode(textContent, forKey: .textContent)
         
         if let summary = summary {
             try container.encode(summary, forKey: .summary)
