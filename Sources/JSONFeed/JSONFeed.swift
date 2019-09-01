@@ -187,12 +187,8 @@ public class JSONFeed: Codable, CustomStringConvertible {
         return FEED
     }
     
-    /**
-     type method that can load JSON from data, which is best used for decoding remote json.
-     - Parameter data: Data to be decoded into JSON Feed
-     - Returns: JSONFeed?
-    */
-    public class func load(from data: Data) -> JSONFeed? {
+    // function to load Data as model from JSON
+    private class func load(from data: Data) -> JSONFeed? {
         
         // create decoder object.
         let JSON_DECODER = JSONDecoder()
