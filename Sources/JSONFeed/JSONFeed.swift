@@ -258,7 +258,11 @@ public class JSONFeed: Codable, CustomStringConvertible {
     public func save(to path: URL) {
         guard let JSON_DATA = json() else { return }
         
-        try? JSON_DATA.write(to: path, options: .atomic)
+        #if os(iOS) || os(watchOS) || os(tvOS)
+            try? JSON_DATA.write(to: path, options: .noFileProtection)
+        #else
+            try? JSON_DATA.write(to: path, options: .atomic)
+        #endif
     }
 
     /**
