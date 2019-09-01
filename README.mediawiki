@@ -6,7 +6,7 @@
 
 '''License:''' See LICENSE
 
-'''Version:''' 0.2.1
+'''Version:''' 0.2.2
 
 ==Notes==
 
@@ -29,6 +29,10 @@ Right now, the models are basic enough that there should not be any troubles com
 <p>Add in computed property that will return content as plain text.</p>
 <p>Also created a string Extension to strip out HTML tags.</p>
 </dd>
+<dt style="font-weight: bold">0.2.2</dt>
+<dd><p>Released 9/1/2019 at roughly 10:00 A.M. PST</p>
+<p>Convert mimeType to enum, for easy specification.</p>
+</dd>
 </dl>
 
 ===Creating Feeds===
@@ -46,7 +50,7 @@ let articles: [JSONFeedItem] = [
         datePublished: Date(), 
         author: author, 
         attachments: [
-                JSONFeedAttachment(withURL: URL(string: "http://example.com/hello.mp3")!, mimeType: "audio/mpeg", title: "Hello, World!", sizeInBytes: 3145728, durationInSeconds: 60)
+                JSONFeedAttachment(withURL: URL(string: "http://example.com/hello.mp3")!, mimeType: .mp3, title: "Hello, World!", sizeInBytes: 3145728, durationInSeconds: 60)
             ])
     ]
 let feed = JSONFeed(title: "Test Feed", homePage: URL(string: "http://example.com"), url: URL(string: "http://example.com/feed"), author: author!, items: articles)
