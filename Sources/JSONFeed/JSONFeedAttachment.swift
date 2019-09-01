@@ -10,15 +10,35 @@ import Foundation
 /**Enumeration to easily specify content type for various audio visual formats.
 */
 public enum MimeType: String, Codable {
+
+    /// Wav mimetype
     case wav = "audio/wav"
+
+    /// WebM Audio mimetype
     case webMAudio = "audio/webm"
+
+    /// WebM Video mimetype
     case webMVideo = "video/webm"
+
+    /// OGG Audio mimetype
     case oggAudio = "audio/ogg"
+
+    /// OGG Video mimetype
     case oggVideo = "video/ogg"
+
+    /// MP4 audio mimetype
     case mp4Audio = "audio/mp4"
+
+    /// MP4 video mimetype
     case mp4Video = "video/mp4"
+
+    /// MP3 mimetype
     case mp3 = "audio/mpeg"
+
+    /// FLAC mimetype
     case flac = "audio/flac"
+
+    /// AAC mimetype
     case aac = "audio/aac"
 }
 
