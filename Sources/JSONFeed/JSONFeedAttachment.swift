@@ -7,6 +7,8 @@
 
 import Foundation
 
+/**Enumeration to easily specify content type for various audio visual formats.
+*/
 public enum MimeType: String, Codable {
     case wav = "audio/wav"
     case webMAudio = "audio/webm"
@@ -62,7 +64,7 @@ public class JSONFeedAttachment: Codable, Equatable, CustomStringConvertible {
         - sizeInBytes: specficifies file size for attachment (optional).
         - durationInSeconds: specifies the attachment's duration (optional)
     */
-    public init(withURL url: URL, mimeType: String, title: String? = nil, sizeInBytes: Int? = nil, durationInSeconds: Int? = nil) {
+    public init(withURL url: URL, mimeType: MimeType, title: String? = nil, sizeInBytes: Int? = nil, durationInSeconds: Int? = nil) {
         self.url = url
         self.mimeType = mimeType
         self.title = title
