@@ -181,11 +181,8 @@ public class JSONFeed: Codable, CustomStringConvertible {
     */
     public class func load(from url: URL) -> JSONFeed? {
         
-        // create decoder object
-        let JSON_DECODER = JSONDecoder()
-        
         // try to retrieve data and decode it into JSONFeed object
-        guard let jsonData = try? Data(contentsOf: url), let FEED = try? JSON_DECODER.decode(JSONFeed.self, from: jsonData) else { return nil }
+        guard let jsonData = try? Data(contentsOf: url), let FEED = load(from: jsonData) else { return nil }
         
         return FEED
     }
