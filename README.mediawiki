@@ -81,7 +81,7 @@ They are:
 <li>Data (JSON data)</li>
 </ul>
 
-Either one could be used, and by the look of things, <strong>should have</strong> been incorperated into one another, since either could be used, but they are currently separate to make things easier.
+Either one could be used, and the first calls the second to actually create an object.
 
 The first would be accomplished like this:
 
@@ -116,9 +116,7 @@ DATA_TASK.resume()
 
 The above utilizes the recommended way to get data from the Internet, and tries to convert the data into a JSONFeed model.
 
-This is not built right into the library, hence the reason the type method '''load(from: Data)''' could just be used inside the URL one (will likely implement data type method inside URL type method soon, since I have finally tested the code).
-
-Unlike the first code sample, the FEED object is not optional because it has been unwrapped because the data method also produces an optional JSONFeed model.
+This is not built right into the library, but is why the one recommended only for local files uses it within the body.
 
 ====Reading====
 
