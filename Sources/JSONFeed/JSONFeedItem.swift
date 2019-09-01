@@ -121,6 +121,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
         // set up RFC3339 date formatter, with timezone set for user's current locale and timezone.
         let RFC3339_DATE_FORMATTER = ISO8601DateFormatter()
         RFC3339_DATE_FORMATTER.timeZone = TimeZone.current
+        RFC3339_DATE_FORMATTER.formatOptions = [.withYear, .withMonth, .withDay, .withTime, .withTimeZone, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]
         
         // create container
         let CONTAINER = try decoder.container(keyedBy: CodingKeys.self)
@@ -229,6 +230,7 @@ public class JSONFeedItem: Codable, Equatable, CustomStringConvertible {
     public func encode(to encoder: Encoder) throws {
         // set up RFC3339 date formatter
         let RFC3339_DATE_FORMATTER = ISO8601DateFormatter()
+        RFC3339_DATE_FORMATTER.formatOptions = [.withYear, .withMonth, .withDay, .withTime, .withTimeZone, .withDashSeparatorInDate, .withColonSeparatorInTime, .withColonSeparatorInTimeZone]
         
         var container = encoder.container(keyedBy: CodingKeys.self)
         
