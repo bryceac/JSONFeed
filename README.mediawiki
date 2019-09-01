@@ -6,7 +6,7 @@
 
 '''License:''' See LICENSE
 
-'''Version:''' 0.2
+'''Version:''' 0.2.1
 
 ==Notes==
 
@@ -23,6 +23,11 @@ Right now, the models are basic enough that there should not be any troubles com
 <dd><p>Released 8/31/2019.</p> 
 <p>Make load(from: Data) private and creature function with completion handler.</p>
 <p>Also made library compatible with iOS, watchOS, and tvOS, by fixing save mechanism.</p>
+</dd>
+<dt style="font-weight: bold">0.2.1</dt>
+<dd><p>Released 9/1/2019.</p>
+<p>Add in computed property that will return content as plain text.</p>
+<p>Also created a string Extension to strip out HTML tags.</p>
 </dd>
 </dl>
 
@@ -137,6 +142,21 @@ Anyone is free to help make this library better, as I will likely only update th
 However, it may take a while for me to approve or reject changes to this library. If you cannot accept that, you are better off maintaining your own fork or contributing to the many other libraries out there with the same name.
 
 The only thing I ask, aside from things required by the MIT License, is that things remain simple and commented well (Hopefully better than mine).
+
+===Known Issues===
+
+<ol>
+<li>
+<dl>
+<dt style="font-weight: bold">Cannot create feed item with Plain Text attribute.</dt>
+<dd>
+<p>While the JSON Feed spec does allow content to be specified with either '''content_html''' or '''content_text''', it is easier for me to require HTML and have the plain text be a computed value.</p>
+<p>As such, I have no intention of ever implementing the ability for there to be a choice.</p>
+<p>However, htmlContent is not strictly expecting HTML. It is just the property that is mapped to the only key that allows HTML content in the spec.</p>
+</dd>
+</dl>
+</li>
+</ol>
 
 ==Support==
 
