@@ -7,6 +7,19 @@
 
 import Foundation
 
+public enum MimeType: String, Codable {
+    case wav = "audio/wav"
+    case webMAudio = "audio/webm"
+    case webMVideo = "video/webm"
+    case oggAudio = "audio/ogg"
+    case oggVideo = "video/ogg"
+    case mp4Audio = "audio/mp4"
+    case mp4Video = "video/mp4"
+    case mp3 = "audio/mpeg"
+    case flac = "audio/flac"
+    case aac = "audio/aac"
+}
+
 /** type that hold data concerning attachments in JSON feed.
  For more information regarding attachments, look under the Attachments section of the [JSON Feed spec.](https://jsonfeed.org/version/1)
  */
@@ -15,7 +28,7 @@ public class JSONFeedAttachment: Codable, Equatable, CustomStringConvertible {
     public var url: URL
     
     /// property that holds attachment mime type.
-    public var mimeType: String
+    public var mimeType: MimeType
     
     /// property that holds the name of the attachment
     public var title: String?
@@ -64,7 +77,7 @@ public class JSONFeedAttachment: Codable, Equatable, CustomStringConvertible {
         let CONTAINER = try decoder.container(keyedBy: CodingKeys.self)
 
         let ATTACHMENT_URL = try CONTAINER.decode(URL.self, forKey: .url)
-        let MIME_TYPE = try CONTAINER.decode(String.self, forKey: .mimeType)
+        let MIME_TYPE = try CONTAINER.decode(MimeType.self, forKey: .mimeType)
 
         var title: String? = nil
 
