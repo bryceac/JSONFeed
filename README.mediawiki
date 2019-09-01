@@ -33,7 +33,7 @@ let articles: [JSONFeedItem] = [
             ])
     ]
 let feed = JSONFeed(title: "Test Feed", homePage: URL(string: "http://example.com"), url: URL(string: "http://example.com/feed"), author: author!, items: articles)
-<pre>
+</pre>
 
 The following creates an optional feed that is set to JSON Feed Version 1.
 
@@ -112,7 +112,7 @@ let DATA_TASK = URLSession.shared.dataTask(with: FEED_REQUEST) {(data, urlRespon
 }
 
 DATA_TASK.resume()
-<pre>
+</pre>
 
 The above utilizes the recommended way to get data from the Internet, and tries to convert the data into a JSONFeed model.
 
