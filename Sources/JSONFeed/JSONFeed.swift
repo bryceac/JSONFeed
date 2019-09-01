@@ -201,7 +201,7 @@ public class JSONFeed: Codable, CustomStringConvertible {
         let DATA_TASK = URLSession.shared.dataTask(with: FEED_REQUEST) {(data, urlResponse, error) in
             
             // make sure there is data and attempt to create JSONFeed object
-            guard let data = data, let FEED = JSONFeed.load(from: data) else {
+            guard let data = data, let FEED = load(from: data) else {
                 completion(nil)
                 return
             }
