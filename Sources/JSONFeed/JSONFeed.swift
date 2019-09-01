@@ -214,7 +214,7 @@ public class JSONFeed: Codable, CustomStringConvertible {
         DATA_TASK.resume()
     }
     
-    // function to load Data as model from JSON
+    // private type method to load Data as model from JSON
     private class func load(from data: Data) -> JSONFeed? {
         
         // create decoder object.
