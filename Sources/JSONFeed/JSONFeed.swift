@@ -202,8 +202,8 @@ public class JSONFeed: Codable, CustomStringConvertible {
             
             // make sure there is data and attempt to create JSONFeed object
             guard let data = data, let FEED = JSONFeed.load(from: data) else {
-                print("could not read data.")
                 completion(nil)
+                return
             }
 
             // send FEED object to completion handler
