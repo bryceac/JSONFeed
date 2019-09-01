@@ -14,7 +14,135 @@ This library utilizes Codable to encode and decode feeds, so it >strong>should</
 
 Right now, the models are basic enough that there should not be any troubles compiling in version of Swift earlier than 5.
 
+===Creating Feeds===
+
+feeds can be created by putting the various parts together.
+
+can can be established like this (things are formatted for easy reading):
+
+<pre>
+let author: JSONFeedAuthor? = JSONFeedAuthor(withName: "William Minerva")
+let articles: [JSONFeedItem] = [
+        JSONFeedItem(withID: "1", 
+        url: URL(string: "http://example.com/hello")!, 
+        title: "Hello, World!", htmlContent: "<p>Hello, World!</p>", 
+        datePublished: Date(), 
+        author: author, 
+        attachments: [
+                JSONFeedAttachment(withURL: URL(string: "http://example.com/hello.mp3")!, mimeType: "audio/mpeg", title: "Hello, World!", sizeInBytes: 3145728, durationInSeconds: 60)
+            ])
+    ]
+let feed = JSONFeed(title: "Test Feed", homePage: URL(string: "http://example.com"), url: URL(string: "http://example.com/feed"), author: author!, items: articles)
+<pre>
+
+The following creates an optional feed that is set to JSON Feed Version 1.
+
+As of August of 2019, version 1 is the latest version and the only one allowed, but it can be expanded later, if the need arises.
+
+===Installation===
+
+This Library only supports two methods of inclusion, one of which has not been tested.
+
+those are via:
+
+<ul>
+<li><abbr title="Swift Package Manager">SPM</abbr></li>
+<li>Manual</li>
+</ul>
+
+Manual has not been tested, but <strong>should</strong> be as simple as generating an XCode project inside the folder containing the library like this:
+
+<pre>
+swift package generate-xcodeproj
+</pre>
+
+And then importing the xcode project into the intended XCode project.
+
+For Swift Package Manager, just add the following to '''Package.swift''', under '''dependencies''':
+
+<pre>
+.package(url: "https://github.com/bryceac/JSONFeed.git", .branch("master"))
+</pre>
+
+And adding it to the dependency list, in the same file, for the target like this:
+
+<pre>
+dependencies: ["JSONFeed"])
+</pre>
+
+===Parsing Feeds===
+
+There are two ways feeds can be loaded/parsed, and <strong>should</strong> be approached using those ways.
+
+They are:
+
+<ul>
+<li>URL (local file)</li>
+<li>Data (JSON data)</li>
+</ul>
+
+Either one could be used, and by the look of things, <strong>should have</strong> been incorperated into one another, since either could be used, but they are currently separate to make things easier.
+
+The first would be accomplished like this:
+
+<pre>
+let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+let ARCHIVE_URL = DOCUMENTS_DIRECTORY.appendingPathComponent("feed").appendingPathExtension("json")
+
+let FEED = JSONFeed(from: ARCHIVE_URL)
+</pre>
+
+This loads a local file named '''feed.json''' into an optional JSONFeed model.
+
+While this can be used for remote files too, it is not recommended because it does utilize best practices for network communication, nor can it be used in conjunction with.
+
+The second would look like this:
+
+<pre>
+let FEED_URL = URL(string: "http://therecord.co/feed.json")!
+
+let FEED_REQUEST = URLRequest(url: FEED_URL)
+
+let DATA_TASK = URLSession.shared.dataTask(with: FEED_REQUEST) {(data, urlResponse, error) in
+    if let data = data, let FEED = JSONFeed.load(from: data) {
+       print(FEED) 
+    } else {
+        print("could not read data")
+    }
+}
+
+DATA_TASK.resume()
+<pre>
+
+The above utilizes the recommended way to get data from the Internet, and tries to convert the data into a JSONFeed model.
+
+This is not built right into the library, hence the reason the type method '''load(from: Data)''' could just be used inside the URL one (will likely implement data type method inside URL type method soon, since I have finally tested the code).
+
+Unlike the first code sample, the FEED object is not optional because it has been unwrapped because the data method also produces an optional JSONFeed model.
+
+====Reading====
+
+It is best to implement output in a way that is appropriate for application, after using one of the above methods, but for debugging purposes, I have made each of the five models used conform to CustomStringConvertible, so that details can be displayed simply by doing this:
+
+<pre>
+print(FEED)
+</pre>
+
+''FEED'' is to be replaced with the variable or constant that contains your feed.
+
+===Contributing===
+
+Anyone is free to help make this library better, as I will likely only update this when needed and I am still a little new to Swift, by creating a fork of this library.
+
+However, it may take a while for me to approve or reject changes to this library. If you cannot accept that, you are better off maintaining your own fork or contributing to the many other libraries out there with the same name.
+
+The only thing I ask, aside from things required by the MIT License, is that things remain simple and commented well (Hopefully better than mine).
+
 ==Support==
 
-As this library is newly created, and not yet tested, I cannot provide any help, though I have tried to make sure to comment things well enough to make things easy to figure out.
+Although I am familiar with Swift, from having gone through both of Apple's books, I am still a little new to the language, so I can only provided limited support.
+
+Anything having to do with how Codable itself and other Foundational stuff works is beyond my current abilities, which means you will be on your own in such events.
+
+This library has been tested with Swift version 5.0.2 on Ubuntu 18.04 and is only guaranteed to work on Swift 5, though it <strong>should</strong> be backwards compatible with version 4, due to how little things have changed in requirements to conform to Codable.
 
